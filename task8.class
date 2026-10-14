@@ -1,0 +1,58 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+class task8 {
+   task8() {
+   }
+
+   public static void main(String[] var0) {
+      try {
+         Class.forName("com.mysql.cj.jdbc.Driver");
+         Connection var1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/5X0", "root", "siddusiddu@1825");
+         System.out.println("Connected to database");
+         Statement var2 = var1.createStatement();
+         var2.executeUpdate("insert into student values(104,'rithick',95)");
+         var2.executeUpdate("insert into student values(105,'jessi',98)");
+         System.out.println("inserted");
+         ResultSet var3 = var2.executeQuery("select * from student");
+         System.out.println("Table");
+
+         while(var3.next()) {
+            PrintStream var10000 = System.out;
+            int var10001 = var3.getInt(1);
+            var10000.println(var10001 + " " + var3.getString(2) + " " + var3.getInt(3));
+         }
+
+         var2.executeUpdate("update student set marks=100 where id=103");
+         System.out.println("update");
+         ResultSet var4 = var2.executeQuery("select * from student");
+         System.out.println("Table");
+
+         while(var4.next()) {
+            PrintStream var7 = System.out;
+            int var9 = var4.getInt(1);
+            var7.println(var9 + " " + var4.getString(2) + " " + var4.getInt(3));
+         }
+
+         var2.executeUpdate("delete from student where id=101");
+         System.out.println("deleted");
+         ResultSet var5 = var2.executeQuery("select * from student");
+         System.out.println("Table");
+
+         while(var5.next()) {
+            PrintStream var8 = System.out;
+            int var10 = var5.getInt(1);
+            var8.println(var10 + " " + var5.getString(2) + " " + var5.getInt(3));
+         }
+
+         var1.close();
+      } catch (Exception var6) {
+         System.out.println(var6);
+      }
+
+   }
+}
